@@ -1,0 +1,4 @@
+PIL
+librosa
+numpy
+matplotlib
