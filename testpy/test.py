@@ -19,18 +19,21 @@ Relacao[:(int(tam/2)),int(tam * 0.3)] = 1
 num_frequencias, num_tempo = Relacao.shape
 
 # Defina a faixa de frequências desejada
-frequencia_minima = 40  # Hz
-frequencia_maxima = 20000  # Hz
+frequencia_minima = 50  # Hz
+frequencia_maxima = 8000  # Hz
 amp_min = -60 ; amp_max = -10
 referencia = 1000
 
 # Gere o áudio com base na matriz de relação mapeada para a faixa de frequências
-tempo = np.linspace(0, duracao, int(taxa_de_amostragem * duracao), endpoint=False)
+frames = int(taxa_de_amostragem * duracao)
+tempo = np.linspace(0, duracao, frames, endpoint=False)
 audio = np.zeros_like(tempo)
+
 
 for f in range(num_frequencias):
     frequencia = frequencia_minima + (frequencia_maxima - frequencia_minima) * (f/num_frequencias)
-    power_temp = [0 * len(tempo)]
+    power_temp = np.array(len(tempo))
+    sen_val = np.sin(2 * np.pi * frequencia * tempo )
     for t in range(num_tempo):
         valor_relacao = Relacao[t,f]
         

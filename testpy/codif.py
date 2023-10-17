@@ -28,7 +28,7 @@ audio = np.zeros(frames)
 
 intv1 = int(frames)
 
-xx = (np.sin(2 * np.pi * ((frequencias[3] - frequencias[1]) / frequencias[1]) * tempo))
+xx = (np.sin(2 * np.pi * ((frequencias[3] - frequencias[1]) / (2 * duracao) * tempo**2 + frequencias[1]) * tempo))
 audio[:] += xx[:]
 
 audio[:intv1] += np.sin(2 * np.pi * frequencias[0] * tempo )[:intv1]   # Um tom simples, você pode personalizar isso
