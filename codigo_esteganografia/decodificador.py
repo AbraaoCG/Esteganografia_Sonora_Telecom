@@ -3,12 +3,12 @@ from scipy.io import wavfile
 import matplotlib.pyplot as plt
 
 # Função para remontar mensagem baseado nas frequências ordenadas.
-def decodificar_frequencias(list_freq):
+def decodificar_frequencias(list_freq,fi, fm, numCar):
     
     # Frequência inicial para o caractere inicial unicode, frequencia máxima e número de caracteres representados.
-    frequencia_inicial = 50
-    freq_maxima = 20000
-    numCaracteresMax = 256
+    frequencia_inicial = fi # 50
+    freq_maxima = fm # 1000
+    numCaracteresMax = numCar # 256
     freqRange = freq_maxima - frequencia_inicial
     difFreq = freqRange / numCaracteresMax # Diferença de frequência entre dois caracteres.
 
@@ -20,7 +20,7 @@ def decodificar_frequencias(list_freq):
     return ''.join(msg_decodificada)
 
 
-def decodificar_mensagem(filename = 'message.wav'):
+def decodificar_mensagem(filename = 'message.wav',fi = 50, fm = 1000, numCar = 256):
     # Carregue o arquivo de áudio
     sample_rate, audio_data = wavfile.read(filename)
 
@@ -42,6 +42,6 @@ def decodificar_mensagem(filename = 'message.wav'):
         dominant_frequency = np.abs(frequencies[np.argmax(magnitudes)]) # Frequência é espelhada, então se aparecer uma frequência negativa na verdade a gerada foi positiva.
         lista_frequencias.append(dominant_frequency)
 
-    return decodificar_frequencias(lista_frequencias)
+    return decodificar_frequencias(lista_frequencias,fi, fm, numCar)
 
 

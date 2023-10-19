@@ -11,15 +11,15 @@ def calcular_frequencia(char,difFreq,frequencia_inicial):
     return frequencia_inicial + difFreq * (ord(char))
 
 
-def enviar_mensagem(entrada,filename = 'message.wav'):
+def enviar_mensagem(entrada,filename = 'message.wav', fi = 50, fm = 1000, numCar = 256):
     ## Definir argumentos
 
     # Argumento para plot ou não do gráfico esperado no espectrometro
     plotFlag = False
     # Frequência inicial para o caractere inicial unicode, frequencia máxima e número de caracteres representados.
-    frequencia_inicial = 50
-    freq_maxima = 20000
-    numCaracteresMax = 256
+    frequencia_inicial = fi # 50
+    freq_maxima = fm # 1000
+    numCaracteresMax = numCar # 256
     # Duração de cada caractere em segundos
     duracao_caractere = 0.5
     # Taxa de amostragem fixa em 'ta' Hz ('ta' amostras por segundo)
