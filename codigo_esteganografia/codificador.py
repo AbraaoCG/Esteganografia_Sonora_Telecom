@@ -5,15 +5,15 @@ from scipy.io import wavfile
 # Recebe um caractere como entrada e calcula a frequência 
 # correspondente com base na distância entre o caractere de primeira numeração --> chr(1).
 # no alfabeto
-def calcular_frequencia(char,difFreq,frequencia_inicial):
-    if(ord(char) > 255):
+def calcular_frequencia(char,difFreq,frequencia_inicial,numCar):
+    if(ord(char) > numCar):
         print('Erro: mensagem deve ser utilizar caracteres na formatação Unicode')
+        print(f'Caractere fora dos padrões: {char}')
     return frequencia_inicial + difFreq * (ord(char))
 
 
-def enviar_mensagem(entrada,filename = 'message.wav', fi = 50, fm = 1000, numCar = 256):
+def enviar_mensagem(entrada,filename = 'message.wav', fi = 50, fm = 1000, numCar = 255, dc = 0.8):
     ## Definir argumentos
-
     # Argumento para plot ou não do gráfico esperado no espectrometro
     plotFlag = False
     # Frequência inicial para o caractere inicial unicode, frequencia máxima e número de caracteres representados.
@@ -21,7 +21,7 @@ def enviar_mensagem(entrada,filename = 'message.wav', fi = 50, fm = 1000, numCar
     freq_maxima = fm # 1000
     numCaracteresMax = numCar # 256
     # Duração de cada caractere em segundos
-    duracao_caractere = 0.5
+    duracao_caractere = dc
     # Taxa de amostragem fixa em 'ta' Hz ('ta' amostras por segundo)
     ta = 44100
     
@@ -34,7 +34,7 @@ def enviar_mensagem(entrada,filename = 'message.wav', fi = 50, fm = 1000, numCar
     #entrada = input("Digite uma mensagem: ")
 
     # Lista para armazenar as frequências de cada caractere
-    frequencias = [calcular_frequencia(char,difFreq,frequencia_inicial) for char in entrada]
+    frequencias = [calcular_frequencia(char,difFreq,frequencia_inicial,numCar) for char in entrada]
 
     # Lista para armazenar o tempo de início de cada caractere
     tempos_inicio = [i * duracao_caractere for i in range(len(entrada))]
@@ -64,7 +64,7 @@ def enviar_mensagem(entrada,filename = 'message.wav', fi = 50, fm = 1000, numCar
     # de ponto flutuante de 32 bits para armazenar os dados do sinal. 
     wavfile.write(filename, ta, sinal.astype(np.float32))
 
-
+    
     if (plotFlag):
         import matplotlib.pyplot as plt
         # Plot da frequência em relação ao tempo

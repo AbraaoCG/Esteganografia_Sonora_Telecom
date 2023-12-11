@@ -3,14 +3,18 @@ from codigo_esteganografia.codificador import enviar_mensagem
 
 # Definir frequência inicial, frequência máxima e número de caracteres
 # permitidos a partir do primeiro ASCII
-fi = 50 ; fm = 661 ; numCar = 256
+fi = 20050 ; fm = 21000 ; numCar = 255
 
-mensagem_env = 'Olá pessoal, esse é um teste do programa!! @!? > . < @#$%&* '
+mensagem_env = "Eles estão na transilvânia!"
 
 
-print(f'Mensagem enviada: {mensagem_env} \n')
+print(f'Mensagem enviada: {mensagem_env} \n tamanho = {len(mensagem_env)}')
 enviar_mensagem(mensagem_env,fi = fi, fm = fm, numCar = numCar)
+
+
 
 mensagem_recebida = decodificar_mensagem(fi = fi, fm = fm, numCar = numCar)
 
 print(f'Mensagem recebida: {mensagem_recebida}')
+
+print(f'Igual = {mensagem_recebida == mensagem_env}')

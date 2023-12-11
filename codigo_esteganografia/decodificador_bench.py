@@ -12,7 +12,7 @@ def decodificar_frequencias(list_freq,fi, fm, numCar):
     freqRange = freq_maxima - frequencia_inicial
     difFreq = freqRange / numCaracteresMax # Diferença de frequência entre dois caracteres.
 
-    msg_decodificada = []        
+    msg_decodificada = []     
     for f in list_freq:
             posicao = int( round( (f - frequencia_inicial) / difFreq) )
             char = chr(posicao)
