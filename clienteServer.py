@@ -10,9 +10,24 @@ mensagem_env = "Eles estão na transilvânia!"
 
 #payload = json.load() #1
 
-resposta = requests.post("http://127.0.0.1:5000/encodeWAV", json={'encodeMsg':mensagem_env , 'mode' : 0}) #2
+mode = 0
+encodeJSON = {'encodeMsg':mensagem_env , 'mode' : mode}
+codificar_msg = requests.post("http://127.0.0.1:5000/encodeWAV", json=encodeJSON) #2
+attachment_data = codificar_msg.content # Arquivo de áudio wav em bytes.
 
-print(resposta)
+print(attachment_data)
+
+# Cabeçalhos necessários para indicar que está enviando dados binários
+headers = {
+    'Content-Type': 'application/octet-stream',  # Tipo de mídia para dados binários
+}
+decodeJSON = {'mode' : mode}
+decodif_msg = requests.post("http://127.0.0.1:5000/decodeWAV", json=decodeJSON, data=attachment_data, headers=headers)
+
+print(decodif_msg)
+
+# with open('myfile.wav', mode='bx') as f:
+#     f.write(attachment_data)
 
 # mensagem_recebida = decodificar_mensagem(fi = fi, fm = fm, numCar = numCar)
 

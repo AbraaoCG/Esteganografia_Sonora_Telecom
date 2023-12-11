@@ -64,7 +64,11 @@ def enviar_mensagem(entrada,filename = 'message.wav', fi = 50, fm = 1000, numCar
     # de ponto flutuante de 32 bits para armazenar os dados do sinal. 
     wavfile.write(filename, ta, sinal.astype(np.float32))
 
-    
+    fin = open(filename, 'rb')
+    audioFile = {'file': fin}
+
+    return audioFile
+
     if (plotFlag):
         import matplotlib.pyplot as plt
         # Plot da frequência em relação ao tempo
