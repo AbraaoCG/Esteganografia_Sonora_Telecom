@@ -65,4 +65,4 @@ def decodificar():
 
         message = decodificar_mensagem(fileName = filePath,fi = fi, fm = fm, numCar = numCar, dc = dc)
 
-        return str(message)
+        return message

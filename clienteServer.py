@@ -2,27 +2,32 @@ from codigo_esteganografia.decodificador import decodificar_mensagem
 from codigo_esteganografia.codificador import enviar_mensagem
 import requests, json
 import base64
+from scipy.io import wavfile
 
 # Definir frequência inicial, frequência máxima e número de caracteres
 # permitidos a partir do primeiro ASCII
 fi = 50 ; fm = 21000 ; numCar = 255 ; dc = 0.02
 
-mensagem_env = "Eles estão na transilvânia!"
-# mensagem_env = "Eles estao na transilvania!"
-
-#payload = json.load() #1
+# mensagem_env = "Eles estão na transilvânia!"
+mensagem_env = "Eles estao na transilvania!"
 
 mode = 0
-encodeJSON = {"encodeMsg":mensagem_env , "mode" : mode}
-codificar_msg = requests.post("http://127.0.0.1:5000/encodeWAV", json= encodeJSON) #2
-attachment_data = codificar_msg.content # Arquivo de áudio wav em bytes.
+# encodeJSON = {"encodeMsg":mensagem_env , "mode" : mode}
+# codificar_msg = requests.post("http://127.0.0.1:5000/encodeWAV", json= encodeJSON) #2
+# attachment_data = codificar_msg.content # Arquivo de áudio wav em bytes.
 
 
+# Opening the binary file in binary mode as rb(read binary)
+# f = open("instance\serverFiles\encodeFile.wav", mode="rb")
+f = open("audioGiovanni.wav", mode="rb")
 
-with open("myfile.wav", mode="bw") as f:
-    f.write(attachment_data)
+ 
+# Reading file data with read() method
+data = f.read()
 
-wavEncoded = base64.b64encode(attachment_data).decode("utf-8")
+# print(data)
+
+wavEncoded = base64.b64encode(data).decode("utf-8")
 
 #print(wavEncoded)
 
