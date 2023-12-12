@@ -20,9 +20,9 @@ def decodificar_frequencias(list_freq,fi, fm, numCar):
     return ''.join(msg_decodificada)
 
 
-def decodificar_mensagem(filename = 'message.wav',fi = 50, fm = 1000, numCar = 255, dc = 0.8):
+def decodificar_mensagem(fileName = 'message.wav',fi = 50, fm = 1000, numCar = 255, dc = 0.8):
     # Carregue o arquivo de áudio
-    sample_rate, audio_data = wavfile.read(filename)
+    sample_rate, audio_data = wavfile.read(fileName)
 
     # Defina o tamanho do segmento( 1 caractere ) em segundos (0.5 segundos)
     segment_duration = dc
